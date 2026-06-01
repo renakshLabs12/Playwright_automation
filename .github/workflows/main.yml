@@ -11,3 +11,8 @@ jobs:
       - uses: karol-brejna-i/webpage-screenshot-action@v1
         with:
           url: https://google.com
+      
+      - name: Test Deployed Website
+        uses: peterekepeter/test-with-browser@v1.1.0
+        with:
+          url: 'https://github.com/status'
