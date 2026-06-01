@@ -12,7 +12,7 @@ const path = require('path');
   
   try {
     const page = await browser.newPage();
-    await page.goto('https://google.com');
+    await page.goto('https://duckduckgo.com/?ia=web&origin=funnel_home_website&t=h_&q=dogdogs');
     await page.screenshot({ path: path.join(screenshotsDir, 'google.png') });
     console.log('✓ Screenshot of Google saved');
   } catch (error) {
