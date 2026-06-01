@@ -1,0 +1,11 @@
+{
+  "name": "playwright-automation",
+  "version": "1.0.0",
+  "description": "Automated screenshot taking with Playwright",
+  "scripts": {
+    "screenshot": "node scripts/screenshot.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
