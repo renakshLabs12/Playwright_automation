@@ -7,16 +7,22 @@ on:
 jobs:
   screenshots:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
 
-      - name: Take Screenshot of Google
-        uses: sushantmimani/hosted-screenshot@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          url: 'https://google.com'
-          path: 'screenshots/'
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install -D @playwright/test
+
+      - name: Install Playwright browsers
+        run: npx playwright install
+
+      - name: Take Screenshot
+        run: node scripts/screenshot.js
 
       - name: Upload Screenshots as Artifact
         uses: actions/upload-artifact@v4
@@ -25,8 +31,3 @@ jobs:
           name: webpage-screenshots
           path: 'screenshots/'
           retention-days: 30
-
-      - name: Test Deployed Website
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
