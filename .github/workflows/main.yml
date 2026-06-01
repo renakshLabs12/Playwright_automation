@@ -7,12 +7,26 @@ on:
 jobs:
   screenshots:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - uses: karol-brejna-i/webpage-screenshot-action@v1
+      - uses: actions/checkout@v4
+
+      - name: Take Screenshot of Google
+        uses: sushantmimani/hosted-screenshot@v2
         with:
-          url: https://google.com
-      
+          url: 'https://google.com'
+          path: 'screenshots/'
+
+      - name: Upload Screenshots as Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: webpage-screenshots
+          path: 'screenshots/'
+          retention-days: 30
+
       - name: Test Deployed Website
-        uses: peterekepeter/test-with-browser@v1.1.0
+        uses: actions/setup-node@v4
         with:
-          url: 'https://github.com/status'
+          node-version: '24'
